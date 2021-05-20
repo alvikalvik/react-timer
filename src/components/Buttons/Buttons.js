@@ -38,7 +38,7 @@ const Buttons = ({
         disabled={currentState === "stopped" || currentState === "paused"}
         onClick={pauseTimer}
       >
-        Wait
+        Pause
       </Button>
       <Button disabled={currentState === "stopped"} onClick={resetTimer}>
         Reset
