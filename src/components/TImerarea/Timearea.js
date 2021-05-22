@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import getFullTime from "../../services/getFullTime";
 
 const TimeareaWrapper = styled.div`
   display: flex;
@@ -29,20 +30,21 @@ const TimeareaElement = styled.div`
   }
 `;
 
-const Timearea = ({ time: {seconds, minutes, hours} }) => {  
+const Timearea = ({ totalSeconds }) => {
+  const {hours, minutes, seconds} = getFullTime(totalSeconds);
   return (    
       <TimeareaWrapper>
         <TimeareaElement>
-          <h3 className="timearea__element-title">Hours</h3>
-          <span className="timearea__indicator timearea__indicator_hours">{hours}</span>
+          <h3>Hours</h3>
+          <span>{hours}</span>
         </TimeareaElement>
         <TimeareaElement>
-          <h3 className="timearea__element-title">Minutes</h3>
-          <span className="timearea__indicator timearea__indicator_minutes">{minutes}</span>
+          <h3>Minutes</h3>
+          <span>{minutes}</span>
         </TimeareaElement>
         <TimeareaElement>
-          <h3 className="timearea__element-title">Seconds</h3>
-          <span className="timearea__indicator timearea__indicator_seconds">{seconds}</span>
+          <h3>Seconds</h3>
+          <span>{seconds}</span>
         </TimeareaElement>
       </TimeareaWrapper>    
   );

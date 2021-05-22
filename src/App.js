@@ -2,17 +2,11 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Buttons from "./components/Buttons/Buttons";
 import Timearea from "./components/TImerarea/Timearea";
-import getFullTime from "./services/getFullTime";
 
 function App() {
   let interval;  
   const [timerState, setTimerState] = useState({
-    time: {
-      totalSeconds: 0,
-      seconds: "00",
-      minutes: "00",
-      hours: "00",
-    },
+    totalSeconds: 0,
     currentState: "stopped", //'runned', 'paused'    
   });
 
@@ -27,7 +21,7 @@ function App() {
       if (timerState.currentState === 'runned') {
         setTimerState({
           ...timerState,
-          time: getFullTime(timerState.time.totalSeconds + 1),              
+          totalSeconds: timerState.totalSeconds + 1,          
         });
       }
     } , 1000);    
@@ -52,7 +46,7 @@ function App() {
   const stopTimer = () => {    
     setTimerState({
       ...timerState,
-      time: getFullTime(0),
+      totalSeconds: 0,
       currentState: "stopped",
     });
     clearInterval(interval);
@@ -61,7 +55,7 @@ function App() {
   const resetTimer = () => {
     setTimerState({
       ...timerState,
-      time: getFullTime(0),
+      totalSeconds: 0,
       currentState: "runned",
     });
     clearInterval(interval);
@@ -71,7 +65,7 @@ function App() {
     <div className="App">
       <h1>Timer</h1>
       <div className="timer__wrapper">
-        <Timearea time={timerState.time} />
+        <Timearea totalSeconds={timerState.totalSeconds} />
         <Buttons
           startTimer={startTimer}
           pauseTimer={pauseTimer}
